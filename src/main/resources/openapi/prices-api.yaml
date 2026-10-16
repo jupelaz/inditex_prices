@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Prices API
+  version: 1.0.0
+  description: Query of the price applicable to a product of a brand at a given date.
+paths:
+  /api/v1/prices:
+    get:
+      operationId: getApplicablePrice
+      summary: Get the price applicable at a given date
+      description: When several price lists overlap at the given date, the one with the highest priority is returned.
+      tags: [prices]
+      parameters:
+        - name: applicationDate
+          in: query
+          required: true
+          description: Date and time the price must be in force.
+          schema:
+            type: string
+            format: date-time
+          example: 2020-06-14T16:00:00
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 35455
+        - name: brandId
+          in: query
+          required: true
+          description: Group brand identifier (1 = ZARA).
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        '200':
+          description: Applicable price
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: Missing or malformed parameter
+        '404':
+          description: No price applies for the given brand, product and date
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      required: [productId, brandId, priceList, startDate, endDate, price, currency]
+      properties:
+        productId:
+          type: integer
+          format: int64
+        brandId:
+          type: integer
+          format: int64
+        priceList:
+          type: integer
+          format: int32
+          description: Applied price list identifier.
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          description: Final sale price.
+        currency:
+          type: string
+          description: ISO 4217 currency code.
