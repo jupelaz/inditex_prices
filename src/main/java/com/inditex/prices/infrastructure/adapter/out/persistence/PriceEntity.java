@@ -9,32 +9,32 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "prices")
+@Table(name = "PRICES")
 public class PriceEntity {
 
     @Id
     private Long id;
 
-    @Column(name = "brand_id")
+    @Column(name = "BRAND_ID")
     private Long brandId;
 
-    @Column(name = "start_date")
+    @Column(name = "START_DATE")
     private LocalDateTime startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "END_DATE")
     private LocalDateTime endDate;
 
-    @Column(name = "price_list")
+    @Column(name = "PRICE_LIST")
     private Integer priceList;
 
-    @Column(name = "product_id")
+    @Column(name = "PRODUCT_ID")
     private Long productId;
 
     private Integer priority;
 
     private BigDecimal price;
 
-    @Column(name = "curr")
+    @Column(name = "CURR")
     private String currency;
 
     protected PriceEntity() {
