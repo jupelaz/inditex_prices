@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-/**
- * Maps errors to RFC 7807 problem responses. Missing or malformed request parameters
- * are already translated to 400 by {@link ResponseEntityExceptionHandler}.
- */
+// Missing or malformed parameters already end up as 400 in the parent class
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 

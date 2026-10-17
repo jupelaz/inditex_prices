@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface PriceRepositoryPort {
 
-    /** Returns the highest priority price in force at the given date, if any. */
     Optional<Price> findApplicablePrice(Long brandId, Long productId, LocalDateTime applicationDate);
 }
